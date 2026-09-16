@@ -1,0 +1,651 @@
+---
+title: "Avaliação do Projeto Primeiro Emprego sob a Ótica dos Pontos Focais: Análise Comparativa Longitudinal (2025–2026)"
+subtitle: "Supervisão cotidiana, acolhimento institucional, comunicação intersetorial e conformidade operacional no serviço público baiano"
+author:
+  - name: "Fernando Antonio de Melo Pereira Lhamas"
+    affiliation: "Universidade Federal do Rio Grande do Norte (UFRN) | Núcleo de Pós-Graduação em Administração (NPGA/UFBA)"
+date: today
+date-format: "MMMM [de] YYYY"
+lang: pt-BR
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Sumário Analítico"
+    number-sections: true
+    theme: cosmo
+    embed-resources: true
+    code-fold: false
+execute:
+  echo: false
+  warning: false
+  message: false
+bibliography: referencias.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/associacao-brasileira-de-normas-tecnicas.csl
+nocite: |
+  @*
+---
+
+```{r}
+#| label: setup-global
+#| include: false
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(scales)
+  library(tinytable)
+})
+
+COR_DESTAQUE <- "#174A7E"
+COR_CONTEXTO <- "#929497"
+COR_TEXTO    <- "#231F20"
+COR_SUBTEXTO <- "#555655"
+COR_GRID     <- "#E5E5E5"
+```
+
+# Sumário Executivo
+
+A presente pesquisa avaliativa examina a implementação, a operação prática e a governança do **Projeto Primeiro Emprego (PPE)** a partir da perspectiva dos **Pontos Focais** — servidores, coordenadores e gestores públicos que supervisionam diretamente o cotidiano laboral dos jovens beneficiários nas secretarias, autarquias, hospitais gerais e policlínicas estaduais da Bahia. 
+
+Com base em um delineamento empírico longitudinal comparando os ciclos de **2025 ($N = 67$)** e **2026 ($N = 77$)**, totalizando **144 gestores públicos**, o estudo oferece um panorama robusto sobre os sucessos formativos e os gargalos de gestão da política pública.
+
+| Dimensão Avaliada | ✅ Principais Fortalezas Observadas | ⚠️ Pontos Críticos e Riscos Operacionais |
+| :--- | :--- | :--- |
+| **Relevância Social** | Validação quase unânime da política pública como indutora indispensável de empregabilidade para a juventude egressa da EPT. | Elevada expectativa de suporte técnico e pedagógico nem sempre suprida na ponta do serviço. |
+| **Acolhimento Inicial** | Recepção humanizada e bem estruturada, com adesão crescente a protocolos e diretrizes formais de integração. | Disparidades entre unidades hospitalares complexas e pequenos órgãos administrativos quanto aos recursos de recepção. |
+| **Comunicação Interinstitucional** | Uso ágil de canais digitais (WhatsApp e E-mail) para resolução pontual de dúvidas e demandas cotidianas. | Percepção de ruídos de comunicação com a entidade parceira gestora (FESF-SUS/FLEM), gerando assimetria informacional sobre prorrogações contratuais. |
+| **Desempenho e Adaptação** | Alta proatividade, excelente relacionamento interpessoal com as equipes permanentes e rápida adaptação à cultura pública. | O manejo da imaturidade juvenil como desafio prático e a carência de instrumentos sistemáticos e objetivos de avaliação contínua. |
+| **Conformidade Operacional** | Reconhecimento generalizado do PPE como ambiente virtuoso de aprendizado prático em serviço. | Casos isolados com risco de desvio de finalidade (cobertura indevida de postos permanentes em unidades desfalcadas). |
+
+---
+
+# Introdução e Contexto Institucional
+
+O sucesso de programas de inserção laboral para jovens egressos da Educação Profissional e Tecnológica (EPT) não decorre exclusivamente da concessão de bolsas de estágio ou contrato especial de trabalho, mas da **qualidade da experiência formativa no posto de atuação**. Nesse desenho institucional, a figura do **Ponto Focal** assume centralidade estratégica: atua como mentor pedagógico, supervisor operacional e mediador de conflitos no ambiente do serviço público.
+
+Na Bahia, o PPE mobiliza centenas de órgãos da administração direta e indireta. A eficácia da política depende criticamente da disposição e das condições objetivas de trabalho dos pontos focais para acolher os jovens, transmitir competências profissionais e assegurar uma transição protegida para o mundo do trabalho formal.
+
+```{mermaid}
+graph TD
+    A["Governo do Estado da Bahia<br>(SETRE / SEC / SESAB)"] --> B["Entidade Gestora Parceira<br>(FESF-SUS / FLEM)"]
+    B --> C["Pontos Focais<br>(Gestores e Supervisores Locais)"]
+    C --> D["Jovens Beneficiários do PPE<br>(Trabalhadores Educandos)"]
+    
+    C -.->|"Acolhimento & Orientação"| D
+    C -.->|"Supervisão de Frequência & Metas"| D
+    B -.->|"Suporte Técnico & Contratual"| C
+```
+
+---
+
+# Nota Técnica e Metodologia
+
+## Coleta de Dados e Perfil Amostral
+
+A pesquisa com gestores foi realizada mediante aplicação de questionário estruturado online, desenvolvido e administrado pela equipe de monitoramento do PPE/FESF-SUS em dois períodos correspondentes:
+
+1. **Ciclo Avaliativo de 2025:** 67 respondentes (coletas efetuadas entre 03 de setembro e 23 de outubro de 2025);
+2. **Ciclo Avaliativo de 2026:** 77 respondentes (coletas efetuadas entre 07 de maio e 18 de junho de 2026);
+3. **Amostra Consolidada:** 144 questionários integralmente respondidos, sem perdas amostrais ou registros incompletos em nenhuma das 20 questões normativas.
+
+## Tratamento, Harmonização e Reprodutibilidade Científica
+
+Os dados foram auditados e processados em conformidade com o script `gest_02_tratamento_dados_2026.R`, estruturados em um pipeline reprodutível de ciência de dados:
+* **Linguagem R [@R]:** Utilizada como ambiente computacional estatístico unificado;
+* **Ecossistema Tidyverse [@tidyverse; @dplyr]:** Empregado para higienização, tipagem estrita de fatores ordenados Likert e transformações tabulares auditáveis;
+* **Visualização de Dados e Storytelling with Data [@ggplot2; @scales]:** Padronização gráfica minimalista com foco pré-atentivo deliberado, paleta institucional coerente e eliminação de sobrecargas visuais;
+* **Tipificação Estrita e Harmonização:** Conversão das escalas Likert de 1 a 5 em fatores ordenados e categorização semântica padronizada para as questões abertas (`q2`, `q4`, `q5`, `q7`, `q11`, `q12`, `q19` e `q20`), garantindo cálculo confiável das variações em pontos percentuais (`p.p.`).
+
+---
+
+# Percepção Geral do Projeto e o Papel do Ponto Focal
+
+A compreensão da eficácia do Projeto Primeiro Emprego exige a análise da perspectiva dos gestores públicos locais que exercem a função de **Ponto Focal**. São esses profissionais que convertem as diretrizes estratégicas da política pública em práticas cotidianas de acolhimento, distribuição de tarefas, mediação formativa e fiscalização de frequência.
+
+## Relevância Global do PPE para a Juventude Baiana
+
+A avaliação inicia-se com a mensuração da relevância atribuída ao PPE pelos gestores em uma escala de 1 ("nada relevante") a 5 ("extremamente relevante"). A @tbl-01-relevancia apresenta as frequências e as variações longitudinais entre 2025 e 2026.
+
+```{r}
+#| label: tbl-01-relevancia
+#| tbl-cap: "Distribuição dos Pontos Focais quanto à relevância do PPE na inserção de jovens no trabalho (2025 vs. 2026)."
+source("gest_03_q1_relevancia.R", local = knitr::knit_global())
+t01_relevancia
+```
+
+A evolução das proporções relativas na escala de relevância é ilustrada na @fig-01-relevancia.
+
+```{r}
+#| label: fig-01-relevancia
+#| fig-cap: "Comparativo longitudinal da percepção de relevância do PPE entre gestores em 2025 e 2026."
+#| fig-align: center
+#| out-width: "100%"
+g01_relevancia
+```
+
+Os resultados empíricos atestam uma consagração institucional inequívoca da política pública:
+* **Hegemonia da Validação Positiva (92,5% para 98,7%):** Somando-se as notas 4 e 5, a relevância do programa foi chancelada por **92,5%** dos gestores em 2025 e atingiu extraordinários **98,7%** em 2026 (**+6,2 pontos percentuais**);
+* **Salto na Pontuação Máxima (+9,4 p.p.):** A categoria máxima "Extremamente relevante" saltou de **77,6%** (52 gestores) para **87,0%** (67 gestores), comprovando que o amadurecimento operacional do programa reforçou a convicção gerencial de que o PPE é essencial para a transição dos egressos da EPT;
+* **Inexistência de Rejeição:** Em 2026, nenhum respondente assinalou notas 1 ou 2, restando apenas um único respondente na faixa neutra (nota 3, 1,3%).
+
+## Atribuições Práticas e Perfil de Atuação do Ponto Focal
+
+Para compreender como a tutoria é exercida na prática, os gestores indicaram sua atribuição prioritária na unidade de trabalho. A @tbl-02-atribuicoes e a @fig-02-atribuicoes discriminam os perfis funcionais declarados.
+
+```{r}
+#| label: tbl-02-atribuicoes
+#| tbl-cap: "Distribuição da principal atribuição prática desempenhada como Ponto Focal do PPE (2025 vs. 2026)."
+source("gest_04_q2_atribuicoes.R", local = knitr::knit_global())
+t02_atribuicoes
+```
+
+```{r}
+#| label: fig-02-atribuicoes
+#| fig-cap: "Perfil funcional prioritário desempenhado pelos gestores e pontos focais do PPE."
+#| fig-align: center
+#| out-width: "100%"
+g02_atribuicoes
+```
+
+A configuração das atribuições evidencia:
+* **Foco Pedagógico e Supervisão Direta:** A função de "Orientação e supervisão direta das atividades dos jovens" é preponderante, concentrando **35,8%** das menções em 2025 e avançando para **39,0%** em 2026 (**+3,2 p.p.**). Esse dado é auspicioso, pois demonstra que os gestores compreendem seu papel prioritariamente como mentores de aprendizagem profissional em serviço;
+* **Fiscalização de Desempenho e Frequência:** O acompanhamento formal de assiduidade e entrega laboral representa o segundo maior bloco, congregando **29,9%** em 2025 e **31,2%** em 2026;
+* **Coprovedoria e Mediação (30% a 34%):** As demais atribuições envolvem tarefas mistas de resolução de conflitos, contato com chefias intermediárias e articulação institucional com a entidade parceira.
+
+## Nível Geral de Desafio da Função de Ponto Focal
+
+Exercer a função de Ponto Focal impõe conciliar as rotinas habituais do serviço público com a mentoria de jovens em início de carreira. A escala de complexidade de 1 ("nada desafiador") a 5 ("extremamente desafiador") é reportada na @tbl-03-niveldesafio e na @fig-03-niveldesafio.
+
+```{r}
+#| label: tbl-03-niveldesafio
+#| tbl-cap: "Distribuição do grau de desafio geral associado à função de Ponto Focal (2025 vs. 2026)."
+source("gest_05_q3_nivel_desafio.R", local = knitr::knit_global())
+t03_nivel_desafio
+```
+
+```{r}
+#| label: fig-03-niveldesafio
+#| fig-cap: "Nível de complexidade e desafio percebido pelos gestores no acompanhamento do PPE."
+#| fig-align: center
+#| out-width: "100%"
+g03_nivel_desafio
+```
+
+A distribuição de frequência revela:
+* **Prevalência do Alto Desafio (~69-70%):** A função é considerada "muito desafiadora" ou "extremamente desafiadora" (notas 4 e 5) por **70,1%** dos gestores em 2025 e **68,8%** em 2026;
+* **Estabilidade da Complexidade Relatada:** A nota 4 permaneceu como a moda estatística em ambos os anos (**40,3%** em 2025 e **41,6%** em 2026), sinalizando que a tutoria de jovens vulneráveis em seu primeiro emprego é percebida como uma atribuição de alta densidade técnica e emocional;
+* **Reserva de Conforto Residual (<8%):** Menos de 8% dos gestores assinalaram baixo nível de desafio (notas 1 e 2), confirmando que a mentoria pública demanda engajamento ativo e esforço cotidiano.
+
+## Principais Desafios Enfrentados na Supervisão Cotidiana
+
+A análise textual e a categorização semântica das 144 respostas discursivas da questão `q4` permitiram identificar quatro grandes eixos de constrangimento operacional, consolidados na @tbl-04-desafios e na @fig-04-desafios.
+
+```{r}
+#| label: tbl-04-desafios
+#| tbl-cap: "Eixos temáticos dos principais desafios enfrentados pelos Pontos Focais na tutoria cotidiana (2025 vs. 2026)."
+source("gest_06_q4_principais_desafios.R", local = knitr::knit_global())
+t04_desafios_categorias
+```
+
+```{r}
+#| label: fig-04-desafios
+#| fig-cap: "Frequência relativa dos eixos de desafios relatados pelos gestores do PPE."
+#| fig-align: center
+#| out-width: "100%"
+g04_desafios_frequencia
+```
+
+O diagnóstico dos desafios aponta:
+* **Falta de Tempo e Sobrecarga Funcional (19,5% a 22,4%):** A indisponibilidade de carga horária protegida para a atividade de mentoria permanece como o maior entrave. Os gestores acumulam suas atribuições rotineiras de chefia ou assistência técnica com a orientação detalhada dos educandos;
+* **Imaturidade Comportamental e Postura Profissional (+5,7 p.p.):** O desafio de gerenciar a adaptação comportamental dos jovens (pontualidade, uso de celulares, vestimenta e comunicação formal) cresceu de **16,4%** para **22,1%** em 2026, refletindo a entrada de coortes mais jovens recém-formadas;
+* **Comunicação com a Entidade Parceira (16,4% a 18,2%):** A lentidão em obter respostas da entidade gestora (FESF-SUS/FLEM), especialmente quanto a reposição de vagas e esclarecimento sobre prazos contratuais;
+* **Infraestrutura e Falta de Pessoal:** Questão crítica que arrefeceu de **7,5%** em 2025 para **2,6%** em 2026, relacionada à precariedade material de postos de trabalho.
+
+## Principais Facilidades e Aspectos Positivos Vivenciados
+
+Em contrapartida às dificuldades, os gestores apontaram as potencialidades e satisfações geradas pela atuação no PPE. A categorização das respostas de `q5` consta na @tbl-05-facilidades e na @fig-05-facilidades.
+
+```{r}
+#| label: tbl-05-facilidades
+#| tbl-cap: "Eixos temáticos das principais facilidades e aspectos positivos destacados pelos Pontos Focais (2025 vs. 2026)."
+source("gest_07_q5_principais_facilidades.R", local = knitr::knit_global())
+t05_facilidades_categorias
+```
+
+```{r}
+#| label: fig-05-facilidades
+#| fig-cap: "Dimensões positivas e fatores de sucesso destacados pelos gestores na tutoria do PPE."
+#| fig-align: center
+#| out-width: "100%"
+g05_facilidades_frequencia
+```
+
+As forças motrizes do PPE evidenciam:
+* **Acolhimento Coletivo e Engajamento da Equipe (+12,5 p.p.):** O apoio dos demais servidores e a receptividade do coletivo de trabalho registraram o maior salto proporcional, avançando de **23,9%** em 2025 para **36,4%** em 2026. A equipe institucional assume a co-responsabilidade no acolhimento dos jovens;
+* **Diálogo Aberto, Empatia e Escuta Ativa (~29-30%):** A construção de vínculos horizontais e canais francos de comunicação com os jovens viabiliza a superação de atritos e favorece a confiança mútua;
+* **Prazer da Mentoria e Evolução Profissional (+10,2 p.p.):** O reconhecimento de que a formação técnica dos jovens é potencializada no posto gerou um salto expressivo na categoria "Acompanhar a evolução e crescimento do jovem", que praticamente dobrou de frequência, indo de **11,9%** para **22,1%** em 2026. Esse dado atesta a alta gratificação psicológica e ética dos servidores públicos ao atuarem como mestres profissionais de uma nova geração.*
+
+---
+
+# Acolhimento, Protocolos e Inserção Organizacional
+
+O acolhimento inicial consubstancia o momento fundador da experiência do jovem no Projeto Primeiro Emprego. É na chegada ao posto de trabalho que se estabelece o contrato psicológico, alinham-se as expectativas operacionais e mitiga-se a ansiedade inerente à estreia no mundo laboral formal.
+
+## Avaliação Global do Processo de Recepção dos Jovens
+
+Os gestores avaliaram a qualidade do acolhimento oferecido em suas repartições em uma escala de 1 ("Muito insatisfatório") a 5 ("Muito satisfatório"). Os dados consolidados constam na @tbl-06-acolhimento e na @fig-06-acolhimento.
+
+```{r}
+#| label: tbl-06-acolhimento
+#| tbl-cap: "Distribuição dos Pontos Focais quanto à avaliação do processo de acolhimento dos jovens no órgão (2025 vs. 2026)."
+source("gest_08_q6_avaliacao_acolhimento.R", local = knitr::knit_global())
+t06_acolhimento
+```
+
+```{r}
+#| label: fig-06-acolhimento
+#| fig-cap: "Avaliação do acolhimento inicial dos beneficiários na percepção dos gestores públicos."
+#| fig-align: center
+#| out-width: "100%"
+g06_acolhimento
+```
+
+Os resultados empíricos atestam:
+* **Forte Satisfação Agregada (81,9% a 92,5%):** A recepção inicial dos educandos nas unidades públicas mantém índices expressivos de aprovação gerencial, reunindo **92,5%** de notas 4 e 5 em 2025 e **81,9%** em 2026;
+* **Crescimento da Zona de Neutralidade (+9,6 p.p.):** Observa-se uma ampliação na avaliação neutra/regular (nota 3), que passou de **6,0%** (4 gestores) para **15,6%** (12 gestores) em 2026. Esse movimento decorre da interiorização acelerada do programa e do ingresso de novos órgãos parceiros, cuja infraestrutura física e de recepção ainda carece de consolidação;
+* **Insatisfação Residual Inexpressiva (~2%):** Apenas 2 gestores em 2026 assinalaram notas 1 e 2 (2,6%), demonstrando que o acolhimento é um dos pilares de maior êxito e menor atrito no PPE.
+
+## Institucionalização Normativa: Existência de Protocolos Padronizados
+
+A maturidade de uma política pública reflete-se na transição de práticas informais e discricionárias para procedimentos operacionais padronizados. A @tbl-07-protocolos e a @fig-07-protocolos reportam a proporção de unidades que dispõem de diretrizes formais de acolhimento.
+
+```{r}
+#| label: tbl-07-protocolos
+#| tbl-cap: "Proporção de órgãos que possuem protocolos ou diretrizes formais para acolhimento do PPE (2025 vs. 2026)."
+source("gest_09_q7_protocolos_acolhimento.R", local = knitr::knit_global())
+t07_protocolos
+```
+
+```{r}
+#| label: fig-07-protocolos
+#| fig-cap: "Evolução da formalização de diretrizes e manuais de acolhimento nos órgãos estaduais."
+#| fig-align: center
+#| out-width: "100%"
+g07_protocolos
+```
+
+A análise da governança normativa destaca:
+* **Avanço na Padronização Institucional (+5,9 p.p.):** A parcela de órgãos com protocolos escritos saltou de **64,2%** em 2025 (43 unidades) para **70,1%** em 2026 (54 unidades), demonstrando um ciclo virtuoso de aprendizagem organizacional no serviço público baiano;
+* **Queda Expressiva da Ausência de Diretrizes (-10,1 p.p.):** As unidades que declararam não possuir nenhuma diretriz recuaram fortemente de **17,9%** para apenas **7,8%** (6 órgãos);
+* **O Desafio da Disseminação Informativa (22,1%):** Cerca de um quinto dos gestores em 2026 declarou não ter certeza sobre a existência de manuais ou protocolos em sua instituição, apontando a necessidade de maior divulgação interna dos materiais orientativos da FESF-SUS.
+
+## Contribuição do Acolhimento para a Integração na Equipe
+
+A importância estratégica da recepção inicial é mensurada pelo grau em que os gestores consideram o acolhimento determinante para a socialização do jovem, conforme sintetizado na @tbl-08-contribuicaointegracao e na @fig-08-contribuicaointegracao.
+
+```{r}
+#| label: tbl-08-contribuicaointegracao
+#| tbl-cap: "Percepção da contribuição do acolhimento para a integração dos beneficiários na equipe (2025 vs. 2026)."
+source("gest_10_q8_contribuicao_integracao.R", local = knitr::knit_global())
+t08_contribuicao_acolhimento
+```
+
+```{r}
+#| label: fig-08-contribuicaointegracao
+#| fig-cap: "Grau de relevância atribuído ao acolhimento como indutor da integração funcional."
+#| fig-align: center
+#| out-width: "100%"
+g08_contribuicao_acolhimento
+```
+
+Os dados revelam um consenso absoluto:
+* **Unanimidade em 2026 (100,0%):** A totalidade dos 77 gestores pesquisados em 2026 categorizou o acolhimento como "É fundamental" (**66,2%**, +5,0 p.p.) ou "Contribui significativamente" (**33,8%**, +3,9 p.p.);
+* **Erradicação da Visão Marginal:** Nenhuma menção a "Contribui apenas em alguma medida" foi registrada em 2026, confirmando que os pontos focais reconhecem o acolhimento não como mera formalidade burocrática, mas como condição *sine qua non* para a eficiência e o bem-estar no trabalho.
+
+## Modos de Socialização e Inserção na Cultura Organizacional
+
+A incorporação dos jovens nos valores e práticas do serviço público ocorre por meio de diferentes estratégias pedagógicas e de convivência. A @tbl-09-insercaocultura e a @fig-09-insercaocultura mapeiam os modelos predominantes.
+
+```{r}
+#| label: tbl-09-insercaocultura
+#| tbl-cap: "Formas de inserção do jovem beneficiário na cultura organizacional do órgão (2025 vs. 2026)."
+source("gest_11_q9_insercao_cultura_orgao.R", local = knitr::knit_global())
+t09_insercao_cultura
+```
+
+```{r}
+#| label: fig-09-insercaocultura
+#| fig-cap: "Estratégias de socialização dos beneficiários do PPE na cultura do serviço público."
+#| fig-align: center
+#| out-width: "100%"
+g09_insercao_cultura
+```
+
+A morfologia da socialização funcional indica:
+* **Predomínio do Apadrinhamento por Servidor Sênior (~52-57%):** A designação de um servidor ou colega experiente para tutelar o jovem no posto de trabalho é a prática hegemônica em ambos os ciclos (**56,7%** em 2025 e **51,9%** em 2026). Esse arranjo favorece a transmissão tácita de normas éticas, procedimentos técnicos e rotinas burocráticas;
+* **Avanço de Práticas Integradas e Multifacetadas (28,4% para 32,5%):** Uma proporção crescente de órgãos conjuga reuniões de equipe, manuais de boas-vindas e participação em eventos de alinhamento;
+* **Apresentação Formal Inicial (15% a 16%):** Prática complementar adotada para legitimar a presença do beneficiário perante a comunidade de trabalho.*
+
+---
+
+# Comunicação Interinstitucional, Canais e Supervisão do Desempenho
+
+A eficácia da supervisão do Projeto Primeiro Emprego reside na articulação harmônica entre a gestão central do programa, as entidades parceiras operacionais executoras (FESF-SUS / FLEM) e os órgãos estaduais demandantes. Esta seção analisa a avaliação dos fluxos comunicacionais com a entidade parceira, os canais de contato preferenciais, a frequência de supervisão e os gargalos enfrentados pelos gestores para a obtenção de dados e suporte institucional.
+
+## Avaliação da Qualidade e Agilidade da Comunicação com a Entidade Parceira
+
+A questão `q10` mensurou a avaliação dos pontos focais acerca da agilidade, clareza e presteza da comunicação mantida com a entidade parceira responsável pelo suporte ao projeto em uma escala Likert de 1 ("Muito insatisfatória") a 5 ("Muito satisfatória"). A distribuição longitudinal é reportada na @tbl-10-qualidadecomunicacao e na @fig-10-qualidadecomunicacao.
+
+```{r}
+#| label: tbl-10-qualidadecomunicacao
+#| tbl-cap: "Avaliação da qualidade e agilidade da comunicação com a entidade parceira do PPE (2025 vs. 2026)."
+source("gest_12_q10_qualidade_comunicacao_parceira.R", local = knitr::knit_global())
+t10_qualidade_comunicacao
+```
+
+```{r}
+#| label: fig-10-qualidadecomunicacao
+#| fig-cap: "Distribuição da avaliação gerencial sobre a comunicação com a entidade parceira gestora."
+#| fig-align: center
+#| out-width: "100%"
+g10_qualidade_comunicacao
+```
+
+Os dados evidenciam uma melhora estrutural substantiva na governança relacional:
+* **Salto na Aprovação Qualificada (+7,1 p.p.):** A proporção acumulada de gestores que avaliam o suporte da entidade parceira como satisfatório ou muito satisfatório (notas 4 e 5) subiu de **63,1%** em 2025 para expressivos **70,2%** em 2026. Em particular, a pontuação máxima (nota 5) registrou expansão de quase 7 pontos percentuais (de **26,9%** para **33,8%**);
+* **Redução Significativa da Insatisfação (-7,0 p.p.):** O estrato insatisfeito (notas 1 e 2) despencou pela metade, regredindo de **13,5%** para apenas **6,5%** (5 gestores em 2026), refletindo esforços deliberados de qualificação das equipes de monitoramento externo e aproximação com os órgãos tomadores;
+* **Estabilidade da Zona Neutra (~23%):** Cerca de 23% dos respondentes posicionam a interação na nota regular (nota 3), apontando oportunidades contínuas de aperfeiçoamento na assertividade das respostas a demandas críticas.
+
+## Canais Institucionais e Vias de Contato Utilizadas
+
+A identificação das plataformas pelas quais a gestão dos postos dialoga com a coordenação do PPE é fundamental para o desenho de estratégias de atendimento unificado. A @tbl-11-canaiscomunicacao e a @fig-11-canaiscomunicacao consolidam as ferramentas mobilizadas pelos gestores (questão `q11`).
+
+```{r}
+#| label: tbl-11-canaiscomunicacao
+#| tbl-cap: "Principais canais de comunicação utilizados pelos Pontos Focais com a entidade parceira (2025 vs. 2026)."
+source("gest_13_q11_canais_comunicacao.R", local = knitr::knit_global())
+t11_canais_comunicacao
+```
+
+```{r}
+#| label: fig-11-canaiscomunicacao
+#| fig-cap: "Perfil de utilização de canais e plataformas de comunicação pelos gestores do PPE."
+#| fig-align: center
+#| out-width: "100%"
+g11_canais_comunicacao
+```
+
+O mapeamento dos canais revela uma arquitetura pragmática e célere:
+* **Hegemonia Absoluta do WhatsApp (~52-55%):** O aplicativo de mensagens instantâneas consubstancia a via de contato prioritária e mais dinâmica de mais da metade dos gestores (**52,2%** em 2025 e **54,5%** em 2026), proporcionando resolução imediata de dúvidas cotidianas, atestados e orientações;
+* **Relevância Formal do E-mail (~30-33%):** Cerca de um terço dos gestores prioriza exclusivamente o correio eletrônico corporativo (**32,8%** em 2025 e **29,9%** em 2026), garantindo a formalidade, rastreabilidade documental e segurança jurídica dos atos administrativos;
+* **Abordagem Multicanal (11% a 13%):** Uma parcela relevante conjuga WhatsApp, telefone e e-mail concomitantemente, a depender do nível de urgência da interlocução. Canais presenciais ou reuniões formais representam uso residual (<3%), refletindo a dispersão geográfica das secretarias e órgãos estaduais.
+
+## Frequência e Rotina do Acompanhamento Laboral
+
+A supervisão direta e diária confere ao gestor local a capacidade de identificar precocemente deficiências formativas e incentivar o desenvolvimento profissional dos jovens. A @tbl-12-frequenciaacompanhamento e a @fig-12-frequenciaacompanhamento detalham a periodicidade desse acompanhamento (questão `q12`).
+
+```{r}
+#| label: tbl-12-frequenciaacompanhamento
+#| tbl-cap: "Periodicidade de acompanhamento e monitoramento dos beneficiários pelos Pontos Focais (2025 vs. 2026)."
+source("gest_14_q12_frequencia_acompanhamento.R", local = knitr::knit_global())
+t12_frequencia_acompanhamento
+```
+
+```{r}
+#| label: fig-12-frequenciaacompanhamento
+#| fig-cap: "Distribuição da frequência de acompanhamento e tutoria dos jovens no ambiente de trabalho."
+#| fig-align: center
+#| out-width: "100%"
+g12_frequencia_acompanhamento
+```
+
+A rotina de monitoramento reflete um perfil marcadamente presencial e próximo:
+* **Acompanhamento Intensivo Majoritário (60% a 63%):** Mais de seis em cada dez gestores dedicam atenção sistemática de alta frequência, divididos entre monitoramento diário (**26,9%** em 2025 e **26,0%** em 2026) e monitoramento semanal (**35,8%** em 2025 e **33,8%** em 2026);
+* **Supervisão Quinzenal e Mensal (28% a 33%):** Aproximadamente um terço dos órgãos opera com ciclos quinzenais ou mensais de devolutiva e checagem de metas, formato que se expandiu ligeiramente em 2026 (+4,6 p.p. na frequência quinzenal), à medida que os jovens adquiriram maior autonomia técnica em suas rotinas;
+* **Ausência de Acompanhamento Esporádico (<8%):** Menos de 8% dos gestores reportaram acompanhamento esporádico ou sob demanda de incidentes, confirmando o compromisso com a formação contínua.
+
+## Desafios na Obtenção de Informações e Suporte Operacional
+
+Apesar dos avanços de comunicação, o acesso a informações detalhadas de gestão de pessoas e suporte sistêmico aos jovens ainda impõe barreiras. A questão `q13` mensurou o nível de desafio enfrentado pelos pontos focais para obter dados, relatórios e esclarecimentos (escala 1 a 5), conforme exposto na @tbl-13-desafioinformacoes e na @fig-13-desafioinformacoes.
+
+```{r}
+#| label: tbl-13-desafioinformacoes
+#| tbl-cap: "Nível de desafio enfrentado para obter informações e suporte da coordenação/parceira (2025 vs. 2026)."
+source("gest_15_q13_desafio_obter_informacoes.R", local = knitr::knit_global())
+t13_desafio_informacoes
+```
+
+```{r}
+#| label: fig-13-desafioinformacoes
+#| fig-cap: "Grau de desafio gerencial na obtenção tempestiva de informações e alinhamentos operacionais."
+#| fig-align: center
+#| out-width: "100%"
+g13_desafio_informacoes
+```
+
+A distribuição do desafio aponta um gargalo institucional persistente:
+* **Zona Crítica de Desafio Elevado (45% a 48%):** Quase metade dos gestores assinalou notas 4 e 5 (**47,7%** em 2025 e **45,5%** em 2026), destacando a complexidade em obter respostas céleres sobre reposição de postos vagos, trâmites de prorrogação ou desligamento, e espelhos de frequência;
+* **Reserva de Facilidade (~34-36%):** Por outro lado, pouco mais de um terço dos gestores pontuou baixo desafio (notas 1 e 2), demonstrando disparidades operacionais entre órgãos centrais com interlocução direta e unidades descentralizadas no interior do estado;
+* **Demanda por Plataforma Integrada:** Esse contraste evidencia a imperiosa necessidade de implementação de um painel de autosserviço (portal do gestor), desonerando os canais interpessoais de WhatsApp e permitindo o acompanhamento em tempo real das ocorrências administrativas.
+
+---
+
+# Perfil Comportamental, Atitudes e Integração dos Beneficiários
+
+A inserção de jovens recém-egressos da educação profissional pública no ambiente estatal requer o desenvolvimento simultâneo de competências técnico-operacionais e de atributos sociocomportamentais (*soft skills*). Sob o olhar dos pontos focais — que atuam como tutores e observadores privilegiados do cotidiano laboral —, esta seção analisa a proatividade dos jovens, o impacto da imaturidade comportamental, a clareza sobre metas de carreira, a adaptação às rotinas públicas e a sociabilidade com os colegas de trabalho.
+
+## Proatividade e Iniciativa no Desempenho das Funções
+
+A questão `q14` avaliou o grau de proatividade, autonomia e diligência manifestado pelos educandos na execução de suas tarefas cotidianas (escala de 1 a 5). A @tbl-14-proatividade e a @fig-14-proatividade evidenciam o comportamento dessa variável entre 2025 e 2026.
+
+```{r}
+#| label: tbl-14-proatividade
+#| tbl-cap: "Avaliação da proatividade geral dos beneficiários nas rotinas de trabalho (2025 vs. 2026)."
+source("gest_16_q14_proatividade_jovens.R", local = knitr::knit_global())
+t14_proatividade
+```
+
+```{r}
+#| label: fig-14-proatividade
+#| fig-cap: "Distribuição percentual da proatividade dos beneficiários segundo os Pontos Focais."
+#| fig-align: center
+#| out-width: "100%"
+g14_proatividade
+```
+
+Os resultados apontam uma evolução notável no comprometimento dos educandos:
+* **Crescimento da Aprovação Agregada (+8,5 p.p.):** A soma dos conceitos positivos (notas 4 e 5) expandiu-se de **74,6%** em 2025 para expressivos **83,1%** em 2026. Os jovens consolidam uma postura dinâmica, prestativa e disposta a solucionar problemas imediatos das unidades;
+* **Migração para a Nota 4 (+21,6 p.p.):** Observou-se uma forte concentração na nota 4 ("Muito proativos"), que avançou de **23,9%** para **45,5%**, denotando uma avaliação mais equilibrada e criteriosa por parte dos tutores;
+* **Erradicação da Passividade Crítica (0,0%):** Nenhum gestor assinalou a nota 1 em 2026, e as notas 1 e 2 somadas representaram ínfimos **2,6%**, confirmando o alto valor funcional agregado pelos jovens às repartições estaduais.
+
+## Imaturidade Comportamental como Desafio Gerencial
+
+Apesar da postura proativa, a transição entre o ambiente escolar e a disciplina do serviço público expõe lacunas de socialização profissional. A questão `q15` mensurou quão desafiadora é a imaturidade dos beneficiários para o exercício da tutoria gerencial (escala 1 a 5), conforme sumarizado na @tbl-15-imaturidade e na @fig-15-imaturidade.
+
+```{r}
+#| label: tbl-15-imaturidade
+#| tbl-cap: "Nível de desafio gerencial decorrente da imaturidade comportamental dos jovens (2025 vs. 2026)."
+source("gest_17_q15_imaturidade_desafio.R", local = knitr::knit_global())
+t15_imaturidade
+```
+
+```{r}
+#| label: fig-15-imaturidade
+#| fig-cap: "Percepção gerencial quanto ao desafio imposto pela imaturidade dos trabalhadores educandos."
+#| fig-align: center
+#| out-width: "100%"
+g15_imaturidade
+```
+
+O diagnóstico atesta a persistência de um desafio formativo central:
+* **Expansão do Alto Desafio (+6,7 p.p.):** A proporção de gestores que encaram a imaturidade como um desafio elevado ou crítico (notas 4 e 5) subiu de **47,8%** em 2025 para **54,5%** em 2026. Esse dado converge com os relatos qualitativos do Bloco I, que apontavam a entrada de beneficiários mais jovens com dificuldades de gerenciamento de tempo, uso excessivo de telas e desconhecimento da hierarquia funcional;
+* **Recuo da Baixa Dificuldade (-14,0 p.p.):** A nota 2 ("Baixo desafio") encolheu de **17,9%** para apenas **3,9%**, sinalizando que a mediação pedagógica e disciplinar consome energia constante da chefia imediata;
+* **Dualidade Pedagógica:** Este achado reforça que o PPE não é uma contratação laboral ordinária, mas uma política formativa cujo sucesso depende de paciência institucional e de suporte contínuo da coordenação central.
+
+## Clareza dos Beneficiários quanto aos Objetivos Profissionais
+
+A capacidade de o jovem vislumbrar seu itinerário formativo e suas aspirações ocupacionais no médio prazo foi investigada na questão `q16` (escala Likert de 1 a 5), cujos resultados figuram na @tbl-16-clarezaobjetivos e na @fig-16-clarezaobjetivos.
+
+```{r}
+#| label: tbl-16-clarezaobjetivos
+#| tbl-cap: "Percepção gerencial sobre a clareza dos beneficiários quanto aos seus objetivos profissionais (2025 vs. 2026)."
+source("gest_18_q16_clareza_objetivos_profissionais.R", local = knitr::knit_global())
+t16_clareza_objetivos
+```
+
+```{r}
+#| label: fig-16-clarezaobjetivos
+#| fig-cap: "Distribuição da percepção sobre o direcionamento de carreira e metas futuras dos jovens."
+#| fig-align: center
+#| out-width: "100%"
+g16_clareza_objetivos
+```
+
+Os dados refletem a complexidade das escolhas de vida da juventude trabalhadora:
+* **Maioria com Direcionamento Definido (~53-57%):** A concordância (notas 4 e 5) mantém-se majoritária, abrangendo **56,7%** em 2025 e **53,2%** em 2026. A experiência no serviço público funciona como catalisadora de vocações e estímulo ao ingresso na universidade ou em concursos públicos;
+* **Expressiva Zona de Indecisão (37,7% em 2026, +4,9 p.p.):** Quase quatro em cada dez gestores pontuaram nota 3 (neutro/indeciso), revelando que parcela substancial dos jovens ainda vivencia angústias e incertezas quanto ao que farão ao término do contrato de trabalho;
+* **Rejeição Residual Baixa (<10%):** Menos de 10% dos gestores avaliaram que os jovens não possuem qualquer meta clara (notas 1 e 2), demonstrando que o PPE atua como uma âncora prospectiva positiva.
+
+## Adaptação à Cultura e Rotinas do Serviço Público
+
+A capacidade de absorver as formalidades, os princípios de impessoalidade e a ética da administração pública foi avaliada na questão `q17` (escala 1 a 5), conforme sintetizado na @tbl-17-adaptacaopublica e na @fig-17-adaptacaopublica.
+
+```{r}
+#| label: tbl-17-adaptacaopublica
+#| tbl-cap: "Avaliação do grau de adaptação dos beneficiários à cultura do serviço público (2025 vs. 2026)."
+source("gest_19_q17_adaptacao_servico_publico.R", local = knitr::knit_global())
+t17_adaptacao_publica
+```
+
+```{r}
+#| label: fig-17-adaptacaopublica
+#| fig-cap: "Grau de assimilação da cultura, normas e rotinas públicas pelos educandos do PPE."
+#| fig-align: center
+#| out-width: "100%"
+g17_adaptacao_publica
+```
+
+A socialização dos jovens revela estabilidade e alta integração:
+* **Ampla Aprovação Gerencial (75,3% a 79,1%):** Mais de três quartos dos pontos focais atestam boa ou excelente adaptação dos beneficiários (notas 4 e 5 em ambos os anos);
+* **Crescimento Moderado da Cautela (+4,0 p.p.):** A avaliação moderada (nota 3) avançou ligeiramente de **19,4%** para **23,4%**, explicada pela complexidade crescente dos processos administrativos informatizados (SEI Bahia e sistemas finalísticos);
+* **Inadaptação Inexistente (0,0% nota 1):** Não houve registro de nota 1 ("Não se adaptam") em nenhum dos ciclos, e a nota 2 situou-se em apenas 1 gestor (~1,3%), desmistificando resistências prévias de que os jovens não se ajustariam ao rigor funcional do Estado.
+
+## Relacionamento Interpessoal e Convivência com a Equipe
+
+O indicador mais exuberante de todo o perfil socioprofissional reside na convivência com os demais servidores e terceirizados da unidade (questão `q18`, escala 1 a 5). Os números constam na @tbl-18-relacionamentoequipe e na @fig-18-relacionamentoequipe.
+
+```{r}
+#| label: tbl-18-relacionamentoequipe
+#| tbl-cap: "Avaliação do relacionamento interpessoal dos jovens com os demais trabalhadores do órgão (2025 vs. 2026)."
+source("gest_20_q18_relacionamento_equipe.R", local = knitr::knit_global())
+t18_relacionamento_equipe
+```
+
+```{r}
+#| label: fig-18-relacionamentoequipe
+#| fig-cap: "Qualidade do vínculo interpessoal e da harmonia dos beneficiários com o quadro institucional."
+#| fig-align: center
+#| out-width: "100%"
+g18_relacionamento_equipe
+```
+
+A convivência diária atinge patamares de excelência institucional:
+* **Quase Unanimidade Positiva (96,1% em 2026, +6,5 p.p.):** As avaliações de relacionamento bom ou excelente somaram impressionantes **96,1%** dos gestores no último ciclo, configurando o índice de aprovação mais elevado de todo o questionário;
+* **Salto na Nota Máxima (+11,4 p.p.):** A classificação "Excelente relação" (nota 5) tornou-se majoritária isolada, saltando de **41,8%** para **53,2%** em 2026;
+* **Harmonia e Quebra de Barreiras Geracionais:** Os relatos enfatizam que a presença dos jovens renova o ambiente de trabalho, fomenta o afeto e estimula os servidores veteranos a compartilhar conhecimento com dedicação paternal/maternal e profissional.
+
+---
+
+# Sugestões de Aprimoramento, Inconformidades e Riscos de Gestão
+
+O fechamento do instrumento avaliativo proporcionou aos pontos focais um espaço qualitativo aberto para manifestar reflexões propositivas e sinalizar fragilidades operacionais que escapam aos quesitos estruturados. A análise semântica das questões abertas `q19` (sugestões de aperfeiçoamento) e `q20` (inconformidades e pontos de atenção crítica) permite mapear as prioridades de reforma e os riscos institucionais que exigem intervenção da coordenação executiva do Projeto Primeiro Emprego.
+
+## Eixos Propositivos dos Pontos Focais para o Aprimoramento do PPE
+
+A categorização temática das 144 manifestações da questão `q19` é detalhada na @tbl-19-sugestoes e na @fig-19-sugestoes, evidenciando as transformações de prioridade entre 2025 e 2026.
+
+```{r}
+#| label: tbl-19-sugestoes
+#| tbl-cap: "Eixos propositivos sugeridos pelos Pontos Focais para o aprimoramento contínuo do PPE (2025 vs. 2026)."
+source("gest_21_q19_sugestoes_aprimoramento.R", local = knitr::knit_global())
+t19_sugestoes
+```
+
+```{r}
+#| label: fig-19-sugestoes
+#| fig-cap: "Distribuição percentual dos principais eixos de sugestões apresentados pelos gestores estaduais."
+#| fig-align: center
+#| out-width: "100%"
+g19_sugestoes
+```
+
+A análise dos relatos qualitativos revela um amadurecimento das reivindicações gerenciais:
+* **Explosão da Demanda por Canais Ágeis (+23,0 p.p.):** A categoria de canais dedicados e retorno célere da coordenação/entidade parceira disparou de **13,4%** em 2025 para **36,4%** em 2026 (28 gestores). Há um apelo veemente pela institucionalização de canais diretos para o gestor (como uma linha ou portal exclusivo), evitando a mistura de demandas de recursos humanos dos jovens com orientações técnicas de supervisão;
+* **Fortalecimento da Formação Prévia e Continuada (+9,0 p.p.):** Reivindicada por **29,9%** dos gestores em 2026 (contra **20,9%** em 2025), a capacitação em informática básica, redação oficial, ética pública e atendimento ao cidadão antes do envio ao posto é considerada decisiva para reduzir a curva de aprendizagem e minimizar o atrito geracional;
+* **Aprimoramento na Alocação e Critérios de Substituição (19,5%):** Os gestores solicitam maior aderência entre a formação técnica original do educando (egresso dos cursos técnicos estaduais) e as reais necessidades setoriais do órgão, além de regras claras e céleres para reposição ou remanejamento de vagas em caso de descompasso de perfil;
+* **Cuidado com a Saúde Mental e Escuta Emocional (~12%):** A manutenção estável do eixo psicossocial reflete a sensibilidade dos gestores frente às vulnerabilidades sociais, ansiedades e conflitos familiares vivenciados pela juventude periférica.
+
+## Matriz de Inconformidades Operacionais e Riscos Críticos
+
+A identificação tempestiva de inconformidades operacionais constitui elemento basilar para a governança de risco no setor público. A categorização da questão `q20` é apresentada na @tbl-20-inconformidades e na @fig-20-inconformidades.
+
+```{r}
+#| label: tbl-20-inconformidades
+#| tbl-cap: "Categorização de inconformidades operacionais e pontos de atenção urgente apontados pelos gestores (2025 vs. 2026)."
+source("gest_22_q20_inconformidades_riscos.R", local = knitr::knit_global())
+t20_inconformidades
+```
+
+```{r}
+#| label: fig-20-inconformidades
+#| fig-cap: "Principais riscos operacionais e inconformidades substantivas que demandam atenção regulatória imediata."
+#| fig-align: center
+#| out-width: "100%"
+g20_inconformidades
+```
+
+Os alertas gerenciais apontam dois nós críticos de governança:
+* **Predomínio da Regularidade Institucional (>61%):** Em ambos os ciclos, mais de 60% dos gestores declararam expressamente inexistir qualquer inconformidade ("Não", "Nenhuma" ou elogios à condução geral), o que atesta a solidez procedimental do programa;
+* **A Armadilha da Expectativa Contratual (1 vs. 2 anos):** Relatada por **9,1%** dos gestores em 2026, a falta de transparência sobre a duração efetiva do contrato do jovem educando gera desgaste humano e administrativo severo. O jovem ingressa projetando uma permanência de dois anos, mas muitos contratos são encerrados ao final de um ano sem critérios transparentes prévios, gerando frustração psicológica no beneficiário e descontinuidade dos serviços no posto de trabalho;
+* **Riscos de Desvio de Função e Substituição Indevida (+3,5 p.p.):** Menções a desvios de atribuição e demandas para colocação dos educandos em escalas de plantão, fins de semana ou em substituição tácita a servidores efetivos cresceram para **6,5%** em 2026. A ausência de fiscalização contínua pode transfigurar a natureza pedagógica do PPE em mão de obra precarizada de custeio administrativo;
+* **Pontualidade de Benefícios e Suporte Básico:** Atrasos na liberação de recargas de auxílio-transporte e demora na emissão de crachás institucionais recuaram de **9,0%** para **3,9%**, demonstrando ganhos de eficiência logística da entidade gestora.
+
+---
+
+# Considerações Finais e Recomendações Estratégicas de Gestão
+
+O presente estudo comparativo longitudinal (2025–2026) consolida a perspectiva analítica dos **Pontos Focais**, revelando que o Projeto Primeiro Emprego (PPE) atingiu um estágio maduro de institucionalização e legitimidade perante o funcionalismo público do Estado da Bahia. Longe de ser compreendido como mero suprimento contingencial de força de trabalho, o programa consolidou-se como uma política de desenvolvimento humano e inclusão produtiva amplamente valorizada pelas chefias imediatas.
+
+## Síntese dos Principais Achados Longitudinais
+
+A trajetória comparativa entre 2025 e 2026 evidencia vetores consistentes de consolidação e desafios pontuais de gestão:
+
+1. **Reconhecimento Ético e Vocacional (q1 a q3):** A relevância do PPE para os órgãos estaduais atinge aprovação quase unânime (**96,1%** de conceitos positivos em 2026), impulsionada pela percepção nítida de atribuições claras (**88,3%**) e pelo engajamento dos gestores, que encaram o esforço de supervisão como um compromisso cívico gratificante;
+2. **Acolhimento e Socialização Exitosa (q6 a q9):** A institucionalização de protocolos formais de recepção avançou para **70,1%** dos órgãos, e o acolhimento é julgado indispensável por **100%** dos gestores. O modelo de apadrinhamento por servidores seniores (**51,9%**) sustenta uma integração comunitária segura e harmoniosa;
+3. **Melhoria da Articulação com a Entidade Parceira (q10 a q13):** A aprovação da qualidade de comunicação com a FESF-SUS/FLEM avançou de **63,1%** para **70,2%**, reduzindo o estrato insatisfeito à metade (**6,5%**). Entretanto, o acesso a informações tempestivas de frequência e suporte administrativo permanece como gargalo crítico para **45,5%** dos gestores, operando predominantemente via WhatsApp informal (**54,5%**);
+4. **Desempenho Socioprofissional de Destaque (q14 a q18):** Os jovens conquistaram a confiança de suas equipes: a proatividade avançou para **83,1%** (+8,5 p.p.), a adaptação ao serviço público alcançou **75,3%** e a convivência interpessoal atingiu ápice de **96,1%** de excelência. Contudo, o impacto da imaturidade comportamental persiste como desafio central para **54,5%** dos tutores (+6,7 p.p.), demandando contínuo investimento em mediação socioemocional.
+
+## Recomendações Estratégicas Aplicadas para a Governança do PPE
+
+Com base no diagnóstico empírico dos 144 relatos e dados tabulares, formulam-se as seguintes recomendações para a Secretaria da Administração (SAEB), a Secretaria do Trabalho, Emprego, Renda e Esporte (SETRE) e as entidades parceiras operacionais executoras (FESF-SUS / FLEM):
+
+### 1. Implantação do Portal Digital do Gestor e Central de Chamados
+Substituir a dependência excessiva de grupos informais de WhatsApp por uma plataforma unificada de autosserviço para os Pontos Focais. O sistema deve permitir a homologação eletrônica de frequência, consulta de atestados, emissão de declarações e abertura de chamados com prazos acordados (*SLAs*) para reposição de vagas e esclarecimento de dúvidas.
+
+### 2. Normatização Transparente dos Prazos e Vigência Contratual (1 vs. 2 Anos)
+Publicar instrução normativa conjunta explicitando de forma inequívoca os critérios objetivos para renovação do contrato do jovem por mais 12 meses (totalizando 24 meses) ou para o encerramento no 12º mês. Essa medida eliminará a ansiedade dos jovens, conferirá previsibilidade aos postos de trabalho e desonerará os gestores locais de pressões psicológicas indevidas.
+
+### 3. Programa Permanente de Formação Socioemocional e Ética Pública (*Onboarding*)
+Intensificar os módulos preparatórios pré-admissão focando em *soft skills*: gerenciamento do tempo, comunicação formal corporativa, etiqueta digital, sigilo institucional e uso adequado de dispositivos móveis. Paralelamente, instituir oficinas curtas de liderança e mentoria empática voltadas exclusivamente aos pontos focais.
+
+### 4. Fortalecimento da Fiscalização contra o Desvio de Finalidade
+Reiterar nos termos de cooperação a proibição estrita de alocação de beneficiários do PPE em escalas extraordinárias de plantão noturno ou em funções finalísticas permanentes de carreira, preservando o caráter eminentemente pedagógico-formativo da política de primeiro emprego.
+
+### 5. Reconhecimento Institucional e Carga Horária Protegida para a Mentoria
+Formalizar nos assentamentos funcionais dos pontos focais a sua atuação como tutores de formação profissional e prever, nas rotinas departamentais, uma carga horária semanal protegida de até 2 horas dedicada exclusivamente ao diálogo pedagógico e acompanhamento dos jovens.
+
+---
+
+# Referências Bibliográficas {.unnumbered}
+
+::: {#refs}
+:::
