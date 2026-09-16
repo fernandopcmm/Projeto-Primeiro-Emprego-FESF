@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto Primeiro Emprego (PPE) - FESF-SUS | Avaliação Longitudinal 2025–2026</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      color: #212529;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .hero-section {
+      background: linear-gradient(135deg, #1b3a4b 0%, #006466 100%);
+      color: #ffffff;
+      padding: 4rem 1.5rem;
+      border-radius: 0 0 1.5rem 1.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .card-report {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: none;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .card-report:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    .badge-tag {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35em 0.65em;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero-section text-center">
+    <div class="container">
+      <h1 class="fw-bold mb-2">Projeto Primeiro Emprego (PPE)</h1>
+      <p class="lead mb-3 text-light opacity-90">Avaliação Longitudinal Comparativa (2025 – 2026)</p>
+      <div class="badge bg-light text-dark px-3 py-2 rounded-pill fs-6">Fundação Estatal Saúde da Família (FESF-SUS)</div>
+    </div>
+  </header>
+
+  <main class="container pb-5">
+    <div class="row justify-content-center mb-4">
+      <div class="col-lg-10">
+        <p class="fs-5 text-muted text-center">
+          Selecione abaixo o relatório que deseja consultar para visualizar as análises completas, indicadores estatísticos e visualizações gráficas interativas:
+        </p>
+      </div>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Card Relatório Beneficiários -->
+      <div class="col-md-6 col-lg-5">
+        <div class="card h-100 card-report p-3">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-primary text-white p-3 rounded-circle me-3">
+                <i class="bi bi-people-fill fs-3"></i>
+              </div>
+              <div>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle badge-tag mb-1">Público-Alvo</span>
+                <h4 class="card-title mb-0 fw-bold">Beneficiários</h4>
+              </div>
+            </div>
+            <p class="card-text text-secondary flex-grow-1">
+              Avaliação do perfil sociodemográfico, mobilidade educacional e territorial, transição e ascensão de renda, acesso a bens de consumo, avaliação das condições de trabalho e expectativas de carreira dos jovens contemplados.
+            </p>
+            <hr class="text-muted">
+            <div class="d-grid">
+              <a href="relatorio_beneficiarios_2025_2026.html" class="btn btn-primary btn-lg rounded-pill fw-semibold">
+                <i class="bi bi-file-earmark-bar-graph me-2"></i>Acessar Relatório
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Relatório Gestores -->
+      <div class="col-md-6 col-lg-5">
+        <div class="card h-100 card-report p-3">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-success text-white p-3 rounded-circle me-3">
+                <i class="bi bi-building-check fs-3"></i>
+              </div>
+              <div>
+                <span class="badge bg-success-subtle text-success border border-success-subtle badge-tag mb-1">Supervisão Institucional</span>
+                <h4 class="card-title mb-0 fw-bold">Gestores e Pontos Focais</h4>
+              </div>
+            </div>
+            <p class="card-text text-secondary flex-grow-1">
+              Diagnóstico do acolhimento institucional, rotinas diárias e atribuições, qualidade dos canais de comunicação com a parceira, maturidade e adaptação ao serviço público estadual, além de conformidade operacional e riscos.
+            </p>
+            <hr class="text-muted">
+            <div class="d-grid">
+              <a href="gest_relatorio_pontos_focais_2025_2026.html" class="btn btn-success btn-lg rounded-pill fw-semibold">
+                <i class="bi bi-file-earmark-text me-2"></i>Acessar Relatório
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Recursos e Código -->
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-10">
+        <div class="card border-0 bg-white shadow-sm p-4 rounded-4">
+          <h5 class="fw-bold mb-3"><i class="bi bi-code-slash text-dark me-2"></i>Reprodutibilidade e Dados Abertos</h5>
+          <p class="text-secondary small mb-3">
+            Todas as rotinas analíticas foram desenvolvidas em linguagem <strong>R</strong> e documentadas via <strong>Quarto</strong>. Os scripts individuais, dicionários de variáveis (codebooks) e bases tabulares completas estão disponíveis no repositório oficial do projeto.
+          </p>
+          <div>
+            <a href="https://github.com/fernandopcmm/Projeto-Primeiro-Emprego-FESF" class="btn btn-outline-dark btn-sm rounded-pill fw-semibold" target="_blank" rel="noopener">
+              <i class="bi bi-github me-1"></i>Ver Repositório no GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-light text-center py-4 border-top mt-auto text-muted small">
+    <div class="container">
+      <p class="mb-1"><strong>Fernando Antonio de Melo Pereira Lhamas</strong></p>
+      <p class="mb-0">Universidade Federal do Rio Grande do Norte (UFRN) | NPGA / Universidade Federal da Bahia (UFBA)</p>
+    </div>
+  </footer>
+
+</body>
+</html>
